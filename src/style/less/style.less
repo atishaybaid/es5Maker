@@ -1,0 +1,45 @@
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
+
+
+
+.main-container{
+	height: 100vh;
+	.top-menu-bar{
+		height: 20%;
+		.title{
+			text-align:center;
+		}
+	}
+	.code-area{
+		height: 70%;
+		.code{
+			width: 100%;
+			height: 100%;
+		}
+		.es5-area{
+			width: 50%;
+			float: left;
+			height:100%;
+		}
+		.es6-area{
+			width: 50%;
+			float: left;
+			height: 100%;
+		}	
+	}
+	.footer{
+		height:10%;
+	}
+}
