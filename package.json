@@ -14,7 +14,10 @@
     "gulp-webpack": "^1.5.0",
     "webpack": "^1.13.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp-connect": "^5.0.0",
+    "gulp-livereload": "^3.8.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -9,10 +9,14 @@ lineNumbers:true
 
 
 
-function create(myTextArea){
+function create(inputTextArea,outputTextArea){
 	
-	let myCodeMirror = CodeMirror.fromTextArea(myTextArea,config);
-	console.log(myCodeMirror);
+	let inputEditor = CodeMirror.fromTextArea(inputTextArea,config);
+	let outputEditor = CodeMirror.fromTextArea(outputTextArea,config);
+
+	return [inputEditor,outputEditor];
+	
+
 }
 
 

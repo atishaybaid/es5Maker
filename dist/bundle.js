@@ -46,11 +46,19 @@
 
 	'use strict';
 
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }(); /*var input = 'const getMessage = () => "Hello World";';
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         var output = Babel.transform(input, { presets: ['es2015'] }).code;
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         console.log(output);
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */
+
 	var _editor = __webpack_require__(1);
 
 	var _editor2 = _interopRequireDefault(_editor);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var inputEditor;
+	var outputEditor;
 
 	(function () {
 
@@ -60,14 +68,27 @@
 			var inputTextarea = document.getElementsByClassName('es5-input')[0];
 			var outputTextarea = document.getElementsByClassName('es6-input')[0];
 
-			console.log("init called");
-			_editor2.default.create(inputTextarea);
-			_editor2.default.create(outputTextarea);
+			var _Editor$create = _editor2.default.create(inputTextarea, outputTextarea);
+
+			var _Editor$create2 = _slicedToArray(_Editor$create, 2);
+
+			inputEditor = _Editor$create2[0];
+			outputEditor = _Editor$create2[1];
+
+
+			inputEditor.on("change", transform);
 		}
-	})(); /*var input = 'const getMessage = () => "Hello World";';
-	      var output = Babel.transform(input, { presets: ['es2015'] }).code;
-	      console.log(output);
-	      */
+
+		function transform(item, changeObj) {
+			console.log(changeObj);
+			console.log(item);
+			console.log("transform called");
+			console.log(inputEditor.getValue());
+
+			var output = Babel.transform(inputEditor.getValue(), { presets: ['es2015'] }).code;
+			console.log(output);
+		}
+	})();
 
 /***/ },
 /* 1 */
@@ -94,10 +115,12 @@
 		lineNumbers: true
 	};
 
-	function create(myTextArea) {
+	function create(inputTextArea, outputTextArea) {
 
-		var myCodeMirror = _codemirror2.default.fromTextArea(myTextArea, config);
-		console.log(myCodeMirror);
+		var inputEditor = _codemirror2.default.fromTextArea(inputTextArea, config);
+		var outputEditor = _codemirror2.default.fromTextArea(outputTextArea, config);
+
+		return [inputEditor, outputEditor];
 	}
 
 	exports.default = {

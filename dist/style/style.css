@@ -27,11 +27,14 @@
   text-align: center;
 }
 .main-container .code-area {
-  height: 70%;
+  height: 60%;
 }
 .main-container .code-area .code {
   width: 100%;
   height: 100%;
+}
+.main-container .code-area .CodeMirror {
+  height: 100% !important;
 }
 .main-container .code-area .es5-area {
   width: 50%;
@@ -44,5 +47,5 @@
   height: 100%;
 }
 .main-container .footer {
-  height: 10%;
+  height: 20%;
 }
