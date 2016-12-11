@@ -44,16 +44,17 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }(); /*var input = 'const getMessage = () => "Hello World";';
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         var output = Babel.transform(input, { presets: ['es2015'] }).code;
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         console.log(output);
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 	var _editor = __webpack_require__(1);
 
 	var _editor2 = _interopRequireDefault(_editor);
+
+	var _compiler = __webpack_require__(4);
+
+	var _compiler2 = _interopRequireDefault(_compiler);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -80,13 +81,15 @@
 		}
 
 		function transform(item, changeObj) {
-			console.log(changeObj);
-			console.log(item);
-			console.log("transform called");
-			console.log(inputEditor.getValue());
 
-			var output = Babel.transform(inputEditor.getValue(), { presets: ['es2015'] }).code;
-			console.log(output);
+			var compiler = new _compiler2.default(window.Babel);
+
+			var _compiler$compile = compiler.compile(inputEditor.getValue()),
+			    _compiler$compile2 = _slicedToArray(_compiler$compile, 2),
+			    output = _compiler$compile2[0],
+			    error = _compiler$compile2[1];
+
+			outputEditor.setValue(output);
 		}
 	})();
 
@@ -10029,6 +10032,49 @@
 
 	});
 
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Compiler = function () {
+		function Compiler(compiler) {
+			_classCallCheck(this, Compiler);
+
+			this.compiler = compiler || window.babel;
+			this.output;
+			this.errors;
+		}
+
+		_createClass(Compiler, [{
+			key: 'compile',
+			value: function compile(inputCode) {
+				try {
+					this.output = this.compiler.transform(inputCode, { presets: ['es2015'] }).code;
+					console.log(this.output);
+				} catch (error) {
+					console.log(error);
+					this.errors = error;
+				}
+
+				return [this.output, this.errors];
+			}
+		}]);
+
+		return Compiler;
+	}();
+
+	exports.default = Compiler;
 
 /***/ }
 /******/ ]);

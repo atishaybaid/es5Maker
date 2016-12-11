@@ -6,3 +6,9 @@ Will be using code mirror for creating editor
 Editors.js
   +create texteditors(uses code mirror to create input and output editor)
 
+
+  Compiler-> A class which compiles the code and produces the output,error.
+  	+constructor(set compiler variable babel)
+  	+compile(use babel compiler and returns output) 
+
+

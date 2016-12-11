@@ -1,10 +1,7 @@
-/*var input = 'const getMessage = () => "Hello World";';
-var output = Babel.transform(input, { presets: ['es2015'] }).code;
-console.log(output);
-*/
 
+import Editor from "./editor.js";
+import Compiler from "./compiler.js";
 
-import Editor from "./editor.js"
 
 var inputEditor;
 var outputEditor;
@@ -28,15 +25,10 @@ var outputTextarea = document.getElementsByClassName('es6-input')[0];
 }
 
 function transform(item,changeObj){
-	console.log(changeObj);
-	console.log(item);
-	console.log("transform called");
-	console.log(inputEditor.getValue());
-
-	var output = Babel.transform(inputEditor.getValue(), { presets: ['es2015'] }).code;
-	console.log(output);
-
-
+	
+	let compiler = new Compiler (window.Babel);
+	let [output,error] = compiler.compile(inputEditor.getValue());
+	outputEditor.setValue(output);
 }
 
 
