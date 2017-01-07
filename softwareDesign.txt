@@ -9,6 +9,11 @@ Editors.js
 
   Compiler-> A class which compiles the code and produces the output,error.
   	+constructor(set compiler variable babel)
-  	+compile(use babel compiler and returns output) 
+  	+compile(use babel compiler and returns output)
 
-
+Things to be implemented
+	+local storage
+	+ eror removal
+	+auto bracket completion
+	+checking if this works offline
+	+file mapping for development enviornment(getting the same file name)

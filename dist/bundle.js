@@ -58,8 +58,11 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	/*import LocalStorage from "./localStorage.js";*/
+
 	var inputEditor;
 	var outputEditor;
+	var localStorage;
 
 	(function () {
 
@@ -68,6 +71,8 @@
 		function init() {
 			var inputTextarea = document.getElementsByClassName('es5-input')[0];
 			var outputTextarea = document.getElementsByClassName('es6-input')[0];
+
+			getLocalStorageData();
 
 			var _Editor$create = _editor2.default.create(inputTextarea, outputTextarea);
 
@@ -89,7 +94,16 @@
 			    output = _compiler$compile2[0],
 			    error = _compiler$compile2[1];
 
+			;
 			outputEditor.setValue(output);
+			window.localStorage.setItem("es5Code", inputEditor.getValue());
+		}
+
+		function getLocalStorageData() {
+			var localStorageData = window.localStorage.getItem('es5Code');
+			if (localStorageData) {
+				inputEditor.setValue(localStorageData);
+			}
 		}
 	})();
 
@@ -10051,6 +10065,7 @@
 		function Compiler(compiler) {
 			_classCallCheck(this, Compiler);
 
+			console.log(compiler);
 			this.compiler = compiler || window.babel;
 			this.output;
 			this.errors;
@@ -10060,6 +10075,7 @@
 			key: 'compile',
 			value: function compile(inputCode) {
 				try {
+					console.log(this.compiler);
 					this.output = this.compiler.transform(inputCode, { presets: ['es2015'] }).code;
 					console.log(this.output);
 				} catch (error) {
