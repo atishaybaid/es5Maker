@@ -17,3 +17,12 @@ Things to be implemented
 	+auto bracket completion
 	+checking if this works offline
 	+file mapping for development enviornment(getting the same file name)
+	+compare with es6console
+	+think as a user for the features you would love to have
+	+basic look and feel 
+	+convert into chrome extension
+
+
+Fixes
+ +horizontal scroll in output editor
+ +
