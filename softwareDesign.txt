@@ -1,0 +1,31 @@
+Softare design specs for  es5Maker
+
+Will be using code mirror for creating editor
+
+
+Editors.js
+  +create texteditors(uses code mirror to create input and output editor)
+
+
+  Compiler-> A class which compiles the code and produces the output,error.
+  	+constructor(set compiler variable babel)
+  	+compile(use babel compiler and returns output)
+
+Things to be implemented
+	+local storage
+	+ eror removal
+	+checking if this works offline
+	file mapping for development enviornment(getting the same file name)
+	+compare with es6console
+	+think as a user for the features you would love to have
+	basic look and feel 
+	+convert into chrome extension
+	+handling resizing of the window
+	+A copy code functionality
+	+A reset editor functionality
+	+A good logo for title
+
+
+Fixes
+ +horizontal scroll in output editor
+ +
